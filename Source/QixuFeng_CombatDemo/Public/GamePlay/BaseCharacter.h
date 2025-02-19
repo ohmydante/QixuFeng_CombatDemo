@@ -22,8 +22,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere)
 	class USpringArmComponent* SpringArm;
-	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent* Camera;
+	
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAbilitySystemComponent* AbilitySystemComponent;
 
@@ -36,4 +35,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	virtual UAbilitySystemComponent* GetAbilitySystem();
+
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	class UCameraComponent* Camera;
 };

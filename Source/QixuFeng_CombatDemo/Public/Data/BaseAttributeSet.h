@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
 #include "BaseAttributeSet.generated.h"
 
 
@@ -20,5 +21,23 @@ UCLASS()
 class QIXUFENG_COMBATDEMO_API UBaseAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
+public:
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="CombatSystem")
+	FGameplayAttributeData Health;
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet,Health)
+	
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="CombatSystem")
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet,MaxHealth)
+	
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="CombatSystem")
+	FGameplayAttributeData Stamia;
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet,Stamia)
+	UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category="CombatSystem")
+	FGameplayAttributeData MaxStamia;
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet,MaxStamia)
+
+
+	void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 	
 };
