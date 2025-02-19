@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "QixuFeng_CombatDemo",
+			"Path": "..\\Source\\QixuFeng_CombatDemo.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "QixuFeng_CombatDemoEditor",
+			"Path": "..\\Source\\QixuFeng_CombatDemoEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
