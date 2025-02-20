@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "AbilitySystemComponent.h"
+#include "Data/BaseAttributeSet.h"
 #include "BaseCharacter.generated.h"
 
 UCLASS()
@@ -26,6 +27,15 @@ protected:
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	UAbilitySystemComponent* AbilitySystemComponent;
 
+	void OnHealthChangedNative(const FOnAttributeChangeData& Data);
+	void OnStamiaChangedNative(const FOnAttributeChangeData& Data);
+
+
+	UFUNCTION(BlueprintImplementableEvent,Category="Ability")
+	void OnHealthChanged(float OldValue,float NewValue);
+	UFUNCTION(BlueprintImplementableEvent,Category="Ability")
+	void OnStamiaChanged(float OldValue,float NewValue);
+
 	
 public:	
 	// Called every frame
@@ -38,4 +48,8 @@ public:
 
 	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
 	class UCameraComponent* Camera;
+	UPROPERTY(VisibleAnywhere,BlueprintReadWrite)
+	UBaseAttributeSet* BaseAttributes;
 };
+
+

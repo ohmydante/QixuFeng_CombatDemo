@@ -3,6 +3,7 @@
 
 #include "GamePlay/BaseCharacter.h"
 
+#include "CanvasTypes.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -30,7 +31,7 @@ ABaseCharacter::ABaseCharacter()
 	Camera->SetupAttachment(SpringArm);
 
 	AbilitySystemComponent=CreateDefaultSubobject<UAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
-
+	BaseAttributes=CreateDefaultSubobject<UBaseAttributeSet>(TEXT("BaseAttributes"));
 	
 }
 
@@ -38,7 +39,13 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	if(AbilitySystemComponent)
+	{
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseAttributes->GetHealthAttribute()).
+		AddUObject(this,&ABaseCharacter::OnHealthChangedNative);
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(BaseAttributes->GetStamiaAttribute()).
+		AddUObject(this,&ABaseCharacter::OnStamiaChangedNative);
+	}
 }
 
 // Called every frame
@@ -60,3 +67,12 @@ UAbilitySystemComponent* ABaseCharacter::GetAbilitySystem()
 	return AbilitySystemComponent;
 }
 
+void ABaseCharacter::OnHealthChangedNative(const FOnAttributeChangeData& Data)
+{
+	OnHealthChanged(Data.OldValue, Data.NewValue);
+}
+
+void ABaseCharacter::OnStamiaChangedNative(const FOnAttributeChangeData& Data)
+{
+	OnStamiaChanged(Data.OldValue, Data.NewValue);
+}
